@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class demo{
+    //other languages have this built in
+    //may be inefficient, but is more readable and easier to write than other solutions
     private static boolean isElementPresent(char[] arr, char key) {
         for(int i = 0; i<arr.length; i++){
             if(arr[i] == key){
@@ -11,6 +13,7 @@ public class demo{
         }
         return false; 
     }
+    //returns list with type Object (generic) containing chars (opperators) and ints
     private static List<Object> numberMaker(char[] rawArray){
         List<Object> eqList = new ArrayList<Object>();
         String numTemp = "";
@@ -43,19 +46,24 @@ public class demo{
     }
 
     public static void main(String[]args){
-        int answer;
         int multAns;
         int divAns;
+
         Scanner scnr = new Scanner(System.in);
         System.out.println("Please enter an equation:");
         String equationString = scnr.nextLine();
+
         char[] equationArray = equationString.toCharArray();
         List<Object> equationList = numberMaker(equationArray);
         List<Object> multDivHandled = new ArrayList<Object>();
         boolean lastOpperatorMD = false;
+
         System.out.println(equationList);
         //first pass
+
         for(int i = 0; i<equationList.size(); i++){
+            //lastOpperatorMD prevents opperators from "stealing"(ignoring bidmas to resolve)
+            //this allows no loss of data while applying X and /
             if(lastOpperatorMD!=true && equationList.get(i).toString().equals("X")){
                     multAns = (int)equationList.get(i-1) * (int)equationList.get(i+1);
                     multDivHandled.add(multAns);
@@ -68,7 +76,7 @@ public class demo{
                     lastOpperatorMD = true;
                 }
             
-
+            //keeps + and - as well as ints uneffected by X and / so they can resolve in another pass
             else if(lastOpperatorMD!=true && equationList.get(i).toString().equals("+")){
                 multDivHandled.add(equationList.get(i-1));
                 multDivHandled.add(equationList.get(i));
@@ -80,7 +88,7 @@ public class demo{
                 multDivHandled.add(equationList.get(i+1));
                 lastOpperatorMD = false;
             }
-            
+            //allows for consecutive / and X
             else if(lastOpperatorMD && equationList.get(i).toString().equals("X")){
                     multAns = (int)multDivHandled.get(multDivHandled.size()-1) * (int)equationList.get(i+1);
                     multDivHandled.set(multDivHandled.size()-1, multAns);
