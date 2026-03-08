@@ -101,7 +101,15 @@ public class calculator{
                     lastOpperatorMD = true;
                 }
         }
-        System.out.println(multDivHandled);
-        }
 
+        System.out.println(multDivHandled);
+        int res = 0; 
+        for(int i = 0; i<multDivHandled.size(); i++){
+            if(equationList.get(i).toString().equals("+") == false){
+                res += (int) multDivHandled.get(i);
+            }
+        }
+        System.out.print(res);
     }
+
+}
