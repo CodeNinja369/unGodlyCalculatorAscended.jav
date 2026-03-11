@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class calculator{
+public class calculatorBruteForce{
     //other languages have this built in
     //may be inefficient, but is more readable and easier to write than other solutions
     private static boolean isElementPresent(char[] arr, char key) {
@@ -129,4 +129,4 @@ public class calculator{
         System.out.print(res); 
     }
 
-}
+}//5-6
